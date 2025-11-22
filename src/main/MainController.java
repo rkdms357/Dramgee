@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import member.MemberDTO;
 import member.MemberController;
+import asset.AssetController;
 // import trade.TradeController;
 // import quiz.QuizController;
 
@@ -17,16 +18,14 @@ public class MainController {
         boolean isStop = false;
         ControllerInterface controller = null;
 
-        System.out.println("🐿️[주식초보다!람쥐 프로그램을 시작합니다]🐿️");
+        System.out.println("🐿️[투자초보다!람쥐 프로그램을 시작합니다]🐿️");
 
         while (!isStop) {
-            if (loginUser != null) {
-                System.out.println("👋안녕하세요, " + loginUser.getUserId() + "님");
-            }
             System.out.println("====================================");
             System.out.println("1. 회원 관리 (가입/로그인)");
-            System.out.println("2. 주식 거래 (매수/매도)");
-            System.out.println("3. 오늘의 퀴즈");
+            System.out.println("2. 종목 시세 조회");
+            System.out.println("3. 코인 거래 (매수/매도)");
+            System.out.println("4. 오늘의 퀴즈");
             System.out.println("99. 프로그램 종료");
             System.out.println("====================================");
             System.out.print("메뉴 선택 >> ");
@@ -34,10 +33,11 @@ public class MainController {
             int job = sc.nextInt();
             switch (job) {
                 case 1 -> controller = new MemberController();
-                case 2 -> {
+                case 2 -> controller = new AssetController();
+                case 3 -> {
                     // controller = new TradeController();
                 }
-                case 3 -> {
+                case 4 -> {
                     // controller = new QuizController();
                 }
                 case 99 -> {

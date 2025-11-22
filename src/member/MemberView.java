@@ -3,7 +3,7 @@ package member;
 public class MemberView {
     public static void menuGuest() {
         System.out.println("--------------[🐿️비회원]--------------");
-        System.out.println("1.회원가입  2.로그인  3.종목보기  99.메인으로");
+        System.out.println("1.회원가입  2.로그인  99.메인으로");
         System.out.println("-------------------------------------");
         System.out.print("메뉴 선택>> ");
     }

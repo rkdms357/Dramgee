@@ -3,39 +3,39 @@ package member;
 import java.util.Scanner;
 
 import main.ControllerInterface;
-import main.MainController; // MainController의 loginUser 변수를 쓰기 위해 임포트
+import main.MainController;
 
 public class MemberController implements ControllerInterface {
     Scanner sc = new Scanner(System.in);
     MemberService memberService = new MemberService();
 
     public void execute(Scanner sc) {
-        this.sc = sc;
         boolean isStop = false;
-
-        //비회원일때
-        if (MainController.loginUser == null) {
-            MemberView.menuGuest();
-            int job = sc.nextInt();
-            switch (job) {
-                case 1 -> f_signUp();
-                case 2 -> f_login();
-                case 3 -> f_viewStocks();
-                case 99 -> isStop = true;
-                default -> System.out.println("잘못된 선택입니다.");
-            }
-        } else { //회원일때
-            MemberView.menuMember(MainController.loginUser.getUserId());
-            int job = sc.nextInt();
-            switch (job) {
-                case 1 -> {
-                    System.out.println("==============내 정보=============");
-                    MemberView.print(MainController.loginUser);
+        while (!isStop) {
+            this.sc = sc;
+            //비회원일때
+            if (MainController.loginUser == null) {
+                MemberView.menuGuest();
+                int job = sc.nextInt();
+                switch (job) {
+                    case 1 -> f_signUp();
+                    case 2 -> f_login();
+                    case 99 -> {isStop = true;}
+                    default -> System.out.println("잘못된 선택입니다.");
                 }
-                case 2 -> f_logout();
-                case 3 -> f_delete();
-                case 99 -> isStop = true;
-                default -> System.out.println("잘못된 선택입니다.");
+            } else { //회원일때
+                MemberView.menuMember(MainController.loginUser.getUserId());
+                int job = sc.nextInt();
+                switch (job) {
+                    case 1 -> {
+                        System.out.println("===============내 정보===============");
+                        MemberView.print(MainController.loginUser);
+                    }
+                    case 2 -> f_logout();
+                    case 3 -> f_delete();
+                    case 99 -> {isStop = true;}
+                    default -> System.out.println("잘못된 선택입니다.");
+                }
             }
         }
     }
@@ -44,13 +44,16 @@ public class MemberController implements ControllerInterface {
     private void f_signUp() {
         MemberDTO member = new MemberDTO();
         System.out.println("===============회원가입================");
-        System.out.print("아이디 입력>> ");
-        String userId = sc.next();
+        String userId = null;
+        while(true) {
+            System.out.print("아이디 입력 (99.메인으로)>> ");
+            userId = sc.next();
 
-        MemberDTO checkMember = memberService.selectById(userId);
-        if (checkMember != null) {
-            MemberView.print("이미 존재하는 아이디입니다.");
-            return;
+            if(userId.equals("99")) return;
+
+            MemberDTO checkMember = memberService.selectById(userId);
+            if (checkMember == null) break;
+            System.out.println("이미 존재하는 아이디입니다. 다시 입력해주세요.");
         }
 
         System.out.print("비밀번호 입력>> ");
@@ -74,24 +77,33 @@ public class MemberController implements ControllerInterface {
     // 2. 내 정보 조회
     private void f_login() {
         System.out.println("===========내 정보 조회(접속)===========");
-        System.out.print("조회(접속)할 아이디 입력>> ");
-        String userId = sc.next();
+        String userId = null;
+        MemberDTO member = null;
+        while(true) {
+            System.out.print("아이디 입력 (99.메인으로)>> ");
+            userId = sc.next();
 
-        MemberDTO member = memberService.selectById(userId);
-        if (member == null) {
-            MemberView.print("존재하지 않는 회원입니다. 회원가입을 먼저 해주세요.");
-            return;
+            if(userId.equals("99")) return; //메인으로
+
+            member = memberService.selectById(userId);
+            if (member != null) break;
+            System.out.println("존재하지 않는 아이디입니다. 다시 입력해주세요.");
         }
 
-        System.out.print("비밀번호 입력>> ");
-        String password = sc.next();
+        while(true) {
+            System.out.print("비밀번호 입력 (99.메인으로)>> ");
+            String password = sc.next();
 
-        if(!password.equals(member.getPassword())) {
-            MemberView.print("비밀번호가 틀렸습니다.");
-            return;
+            if(password.equals("99")) return; //메인으로
+            if(password.equals(member.getPassword())) {
+                break;
+            }
+            System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
         }
+
         MainController.loginUser = member;
         MemberView.print(member);
+        System.out.println("👋안녕하세요, " + member.getUserId() + "님");
     }
 
     // 3. 로그아웃
@@ -100,12 +112,7 @@ public class MemberController implements ControllerInterface {
         MainController.loginUser = null;
     }
 
-    // 4. 종목 보기
-    private void f_viewStocks() {
-        System.out.println("===============종목시세===============");
-    }
-
-    // 5. 회원 탈퇴
+    // 4. 회원 탈퇴
     private void f_delete() {
         System.out.println("===============회원탈퇴===============");
         System.out.print("탈퇴할 아이디 입력>> ");
@@ -114,14 +121,14 @@ public class MemberController implements ControllerInterface {
         MemberDTO member = memberService.selectById(userId);
         if (member == null) {
             MemberView.print("존재하지 않는 아이디입니다.");
-            return;
+            MemberView.menuMember(MainController.loginUser.getUserId());;
         }
 
         System.out.print("비밀번호 입력>> ");
         String password = sc.next();
         if (!password.equals(member.getPassword())) {
             MemberView.print("비밀번호가 틀렸습니다.");
-            return;
+            MemberView.menuMember(MainController.loginUser.getUserId());;
         }
 
         String msg = memberService.deleteService(userId);
