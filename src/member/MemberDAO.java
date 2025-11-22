@@ -1,10 +1,6 @@
 package member;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
 import util.DBUtil;
 
 public class MemberDAO {
