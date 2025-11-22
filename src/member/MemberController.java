@@ -1,9 +1,8 @@
 package member;
 
 import java.util.Scanner;
-
-import main.ControllerInterface;
-import main.MainController;
+import main.*;
+import portfolio.PortfolioController;
 
 public class MemberController implements ControllerInterface {
     Scanner sc = new Scanner(System.in);
@@ -27,10 +26,7 @@ public class MemberController implements ControllerInterface {
                 MemberView.menuMember(MainController.loginUser.getUserId());
                 int job = sc.nextInt();
                 switch (job) {
-                    case 1 -> {
-                        System.out.println("===============내 정보===============");
-                        MemberView.print(MainController.loginUser);
-                    }
+                    case 1 -> f_myPortfolio();
                     case 2 -> f_logout();
                     case 3 -> f_delete();
                     case 99 -> {isStop = true;}
@@ -74,9 +70,9 @@ public class MemberController implements ControllerInterface {
         }
     }
 
-    // 2. 내 정보 조회
+    // 2. 로그인
     private void f_login() {
-        System.out.println("===========내 정보 조회(접속)===========");
+        System.out.println("===============로그인-================");
         String userId = null;
         MemberDTO member = null;
         while(true) {
@@ -139,5 +135,10 @@ public class MemberController implements ControllerInterface {
             MainController.loginUser = null;
             System.out.println("로그아웃 되었습니다.");
         }
+    }
+
+    // 5. 내 보유 자산 확인
+    private void f_myPortfolio() {
+        new PortfolioController().printMyPortfolio();
     }
 }
