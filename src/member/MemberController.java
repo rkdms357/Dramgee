@@ -111,20 +111,20 @@ public class MemberController implements ControllerInterface {
     // 4. 회원 탈퇴
     private void f_delete() {
         System.out.println("===============회원탈퇴===============");
-        System.out.print("탈퇴할 아이디 입력>> ");
-        String userId = sc.next();
+        String userId = MainController.loginUser.getUserId();
 
+        // (로그인이 풀렸거나 할 때)
         MemberDTO member = memberService.selectById(userId);
         if (member == null) {
-            MemberView.print("존재하지 않는 아이디입니다.");
-            MemberView.menuMember(MainController.loginUser.getUserId());;
+            MemberView.print("회원 정보를 찾을 수 없습니다.");
+            return;
         }
 
-        System.out.print("비밀번호 입력>> ");
+        System.out.print("본인 확인을 위해 비밀번호 입력>> ");
         String password = sc.next();
         if (!password.equals(member.getPassword())) {
             MemberView.print("비밀번호가 틀렸습니다.");
-            MemberView.menuMember(MainController.loginUser.getUserId());;
+            return;
         }
 
         String msg = memberService.deleteService(userId);
