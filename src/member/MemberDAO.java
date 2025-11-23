@@ -20,7 +20,7 @@ public class MemberDAO {
                 member = new MemberDTO();
                 member.setUserId(rs.getString("user_id"));
                 member.setPassword(rs.getString("password"));
-                member.setPoints(rs.getInt("points"));
+                //member.setPoints(rs.getInt("points"));
                 member.setCash(rs.getInt("cash"));
             }
         } catch (SQLException e) {
@@ -36,14 +36,14 @@ public class MemberDAO {
         String msg = null;
         Connection conn = null;
         PreparedStatement st = null;
-        String sql = "insert into users values (?, ?, ?, ?)";
+        String sql = "insert into users values (?, ?, ?)";
         try {
             conn = DBUtil.dbconnect();
             st = conn.prepareStatement(sql);
             st.setString(1, member.getUserId());
             st.setString(2, member.getPassword());
-            st.setInt(3, member.getPoints());
-            st.setInt(4, member.getCash());
+            //st.setInt(3, member.getPoints());
+            st.setInt(3, member.getCash());
             int result = st.executeUpdate();
             if (result > 0) {
                 msg = "회원가입 되었습니다.";

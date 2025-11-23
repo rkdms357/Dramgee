@@ -13,11 +13,11 @@ public class MemberDTO {
 
     @NonNull String userId;
     @NonNull String password;
-    int points;
+    //int points;
     int cash;
 
     @Override
     public String toString() {
-        return "보유현금=" + cash + ", 보유도토리=" + points;
+        return "보유 투자금=" + cash;
     }
 }

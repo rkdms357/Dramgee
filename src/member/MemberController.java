@@ -39,7 +39,7 @@ public class MemberController implements ControllerInterface {
     // 1. 회원가입
     private void f_signUp() {
         MemberDTO member = new MemberDTO();
-        System.out.println("===============회원가입================");
+        System.out.println("================회원가입================");
         String userId = null;
         while(true) {
             System.out.print("아이디 입력 (99. 이전으로)>> ");
@@ -58,7 +58,6 @@ public class MemberController implements ControllerInterface {
         member.setUserId(userId);
         member.setPassword(userPw);
 
-        member.setPoints(100);       // 포인트 100점
         member.setCash(100000);     // 현금 10만원
 
         // 서비스 호출해서 DB에 저장
@@ -66,13 +65,13 @@ public class MemberController implements ControllerInterface {
         MemberView.print(msg); // "회원가입 되었습니다" 출력됨
 
         if(msg.contains("회원가입 되었습니다")) {
-            MemberView.print("🎉가입축하금으로 도토리 100개, 현금 10만원 지급되었습니다.");
+            MemberView.print("🎉가입축하금으로 투자금 10만원 지급되었습니다.");
         }
     }
 
     // 2. 로그인
     private void f_login() {
-        System.out.println("================로그인=================");
+        System.out.println("=================로그인=================");
         String userId = null;
         MemberDTO member = null;
         while(true) {
@@ -110,7 +109,7 @@ public class MemberController implements ControllerInterface {
 
     // 4. 회원 탈퇴
     private void f_delete() {
-        System.out.println("===============회원탈퇴================");
+        System.out.println("================회원탈퇴================");
         String userId = MainController.loginUser.getUserId();
 
         // (로그인이 풀렸거나 할 때)

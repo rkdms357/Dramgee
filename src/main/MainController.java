@@ -21,13 +21,13 @@ public class MainController {
         System.out.println("🐿️[투자초보다!람쥐 프로그램을 시작합니다]🐿️");
 
         while (!isStop) {
-            System.out.println("===============메인화면================");
+            System.out.println("============[🐿️메인 화면🐿️]=============");
             System.out.println("1. 회원 메뉴 (가입/로그인)");
             System.out.println("2. 코인 시세 조회");
             //System.out.println("4. 오늘의 퀴즈");
             if (loginUser != null) System.out.println("3. 코인 거래 메뉴 (매수/매도)");
             System.out.println("99. 프로그램 종료");
-            System.out.println("=====================================");
+            System.out.println("======================================");
             System.out.print("메뉴 선택>> ");
 
             int job = sc.nextInt();

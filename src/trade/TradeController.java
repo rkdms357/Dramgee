@@ -34,7 +34,7 @@ public class TradeController implements ControllerInterface {
 
     // 1. 매수하기
     private void f_buy() {
-        System.out.println("===============매수(구매)하기===============");
+        System.out.println("=============매수(구매)하기==============");
         System.out.println("내 잔고: " + MainController.loginUser.getCash() + "원");
         coinPricePrint();
 
@@ -72,8 +72,7 @@ public class TradeController implements ControllerInterface {
     }
     // 2. 매도하기
     private void f_sell() {
-        System.out.println("===============매도(판매)하기===============");
-
+        System.out.println("=============매도(판매)하기==============");
         String userId = MainController.loginUser.getUserId();
         List<PortfolioDTO> myList = portfolioService.getMyPortfolio(userId);
 
@@ -132,7 +131,7 @@ public class TradeController implements ControllerInterface {
 
     // 매수/매도 기록 보기
     private void f_history() {
-        System.out.println("=============거래 내역 조회=============");
+        System.out.println("=============거래 내역 조회==============");
         String userId = MainController.loginUser.getUserId();
         List<TradeDTO> list = tradeService.getTradeHistory(userId);
 
@@ -156,7 +155,6 @@ public class TradeController implements ControllerInterface {
                     t.getTradePrice()      // 가격
             );
         }
-        System.out.println("=====================================");
         System.out.println("-----------------------------------------------------------");
     }
 }

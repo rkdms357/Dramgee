@@ -6,7 +6,7 @@ import main.MainController;
 public class PortfolioView {
 
     public static void printPortfolio(List<PortfolioDTO> list) {
-        System.out.println("============내 보유 자산 현황============");
+        System.out.println("============내 보유 자산 현황=============");
 
         if (list == null || list.isEmpty()) {
             System.out.println("보유 중인 코인이 없습니다. 거래소에서 매수해보세요");
