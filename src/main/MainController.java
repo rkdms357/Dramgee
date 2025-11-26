@@ -5,8 +5,8 @@ import java.util.Scanner;
 import member.MemberDTO;
 import member.MemberController;
 import asset.AssetController;
+import quiz.QuizController;
 import trade.TradeController;
-// import quiz.QuizController;
 
 public class MainController {
 
@@ -22,10 +22,10 @@ public class MainController {
 
         while (!isStop) {
             System.out.println("============[🐿️메인 화면🐿️]=============");
-            System.out.println("1. 회원 메뉴 (가입/로그인)");
+            System.out.println("1. 회원 메뉴");
             System.out.println("2. 코인 시세 조회");
-            //System.out.println("4. 오늘의 퀴즈");
-            if (loginUser != null) System.out.println("3. 코인 거래 메뉴 (매수/매도)");
+            System.out.println("3. 오늘의 퀴즈");
+            if (loginUser != null) System.out.println("4. 코인 거래 메뉴 (매수/매도)");
             System.out.println("99. 프로그램 종료");
             System.out.println("======================================");
             System.out.print("메뉴 선택>> ");
@@ -34,10 +34,8 @@ public class MainController {
             switch (job) {
                 case 1 -> controller = new MemberController();
                 case 2 -> controller = new AssetController();
-                case 3 -> controller = new TradeController();
-                case 4 -> {
-                    // controller = new QuizController();
-                }
+                case 3 -> controller = new QuizController();
+                case 4 -> controller = new TradeController();
                 case 99 -> {
                     isStop = true;
                     controller = null;
