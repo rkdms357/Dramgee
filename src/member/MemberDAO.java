@@ -81,9 +81,16 @@ public class MemberDAO {
             st.executeUpdate();
             st.close();
 
-            // 부모(회원) 삭제
-            String sql3 = "delete from users where user_id = ?";
+            // 자식 데이터 삭제 (퀴즈 기록)
+            String sql3 = "delete from quiz_log where user_id = ?";
             st = conn.prepareStatement(sql3);
+            st.setString(1, userId);
+            st.executeUpdate();
+            st.close();
+
+            // 부모(회원) 삭제
+            String sql4 = "delete from users where user_id = ?";
+            st = conn.prepareStatement(sql4);
             st.setString(1, userId);
             int result = st.executeUpdate();
 
