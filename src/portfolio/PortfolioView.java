@@ -10,7 +10,7 @@ public class PortfolioView {
 
         if (list == null || list.isEmpty()) {
             System.out.println("보유 중인 코인이 없습니다. 거래소에서 매수해보세요");
-            System.out.printf("보유 현금(예수금): %,d 원\n", MainController.loginUser.getCash());
+            System.out.printf("보유 투자금: %,d 원\n", MainController.loginUser.getCash());
             return;
         }
 
@@ -39,11 +39,11 @@ public class PortfolioView {
         int totalAsset = myCash + totalCoinValue;
 
         System.out.println("--------------------------------------------------------------------------------");
-        System.out.printf("보유 현금   : %,15d 원\n", myCash);
+        System.out.printf("보유 투자금 : %,15d 원\n", myCash);
         System.out.printf("코인 평가액 : %,15d 원\n", totalCoinValue);
         System.out.printf("총 평가손익 : %,15d 원\n", totalProfit);
         System.out.println("================================================================================");
-        System.out.printf("총 자산 (현금+코인) : %,d 원\n", totalAsset);
+        System.out.printf("총 자산 (투자금+코인) : %,d 원\n", totalAsset);
         System.out.println("================================================================================");
     }
 }

@@ -58,14 +58,14 @@ public class MemberController implements ControllerInterface {
         member.setUserId(userId);
         member.setPassword(userPw);
 
-        member.setCash(100000);     // 현금 10만원
+        member.setCash(1000000);     // 현금 100만원
 
         // 서비스 호출해서 DB에 저장
         String msg = memberService.insertService(member);
         MemberView.print(msg); // "회원가입 되었습니다" 출력됨
 
         if(msg.contains("회원가입 되었습니다")) {
-            MemberView.print("🎉가입축하금으로 투자금 10만원 지급되었습니다.");
+            MemberView.print("🎉가입축하금으로 투자금 100만원 지급되었습니다.");
         }
     }
 

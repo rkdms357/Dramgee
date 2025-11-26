@@ -18,6 +18,6 @@ public class MemberDTO {
 
     @Override
     public String toString() {
-        return "보유 투자금=" + cash;
+        return String.format("보유 투자금 : %,d", cash);
     }
 }

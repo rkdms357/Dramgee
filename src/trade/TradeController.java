@@ -35,7 +35,9 @@ public class TradeController implements ControllerInterface {
     // 1. 매수하기
     private void f_buy() {
         System.out.println("=============매수(구매)하기==============");
-        System.out.println("내 잔고: " + MainController.loginUser.getCash() + "원");
+        System.out.println(
+                String.format("보유 투자금 : %,d원", MainController.loginUser.getCash())
+        );
         coinPricePrint();
 
         String symbol = null;
@@ -120,7 +122,9 @@ public class TradeController implements ControllerInterface {
         String msg = tradeService.sellCoin(symbol, count);
         TradeView.print(msg);
 
-        System.out.println("내 잔고: " + MainController.loginUser.getCash() + "원");
+        System.out.println(
+                String.format("보유 투자금 : %,d원", MainController.loginUser.getCash())
+        );
     }
 
     private void coinPricePrint() {
